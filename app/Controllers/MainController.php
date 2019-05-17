@@ -47,4 +47,23 @@ class MainController extends AbstractController
             'lng' => round($lng/$countMarkers, 2),
         ]);
     }
+
+    /**
+     * List all addresses
+     *
+     * @throws NotFoundException
+     */
+    public function listAddresses()
+    {
+        $mainModel = new MainModel();
+        $result = [];
+
+        foreach ($mainModel->getAddresses() as $address) {
+            $result[] = $address['address'];
+        }
+
+        $this->render('list', [
+            'addresses' => $result
+        ]);
+    }
 }

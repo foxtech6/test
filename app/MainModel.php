@@ -21,4 +21,14 @@ class MainModel extends AbstractModel
     {
         return $this->db->query("select * from `markers`")->fetchAll();
     }
+
+    /**
+     * List addresses all markets from db
+     *
+     * @return array Return addresses
+     */
+    public function getAddresses(): array
+    {
+        return $this->db->query("select address from `markers`")->fetchAll();
+    }
 }
