@@ -12,4 +12,13 @@ use Foxtech\Kernel\AbstractModel;
  */
 class MainModel extends AbstractModel
 {
+    /**
+     * Get all markets from db
+     *
+     * @return array Return markers
+     */
+    public function getMarkers(): array
+    {
+        return $this->db->query("select * from `markers`")->fetchAll();
+    }
 }
