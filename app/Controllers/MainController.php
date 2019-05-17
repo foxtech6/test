@@ -21,6 +21,30 @@ class MainController extends AbstractController
      */
     public function index(): void
     {
-        $this->render('main');
+        $mainModel = new MainModel();
+
+        $lan = 0;
+        $lng = 0;
+        $result = [];
+
+        foreach ($mainModel->getMarkers() as $number => $marker) {
+            $lan += $marker['lat'];
+            $lng += $marker['lng'];
+
+            $result[] = [
+                $marker['address'],
+                $marker['lat'],
+                $marker['lng'],
+                $number,
+            ];
+        }
+
+        $countMarkers = count($result);
+
+        $this->render('main', [
+            'markers' => $result,
+            'lan' => round($lan/$countMarkers, 2),
+            'lng' => round($lng/$countMarkers, 2),
+        ]);
     }
 }
