@@ -1,0 +1,23 @@
+#!/usr/bin/env php
+<?php
+
+$isCli = true;
+
+require_once __DIR__ . '/public/index.php';
+
+if ($handle = opendir(PROJECT_PATH . '/updates')) {
+    while (false !== ($entry = readdir($handle))) {
+
+        if (in_array($entry, ['.', '..'])) {
+            continue;
+        }
+
+        require_once PROJECT_PATH . '/updates/' . $entry;
+
+        $update = substr($entry, 0, strlen($entry) - 4);
+        $update = new $update();
+        $update->run();
+    }
+
+    closedir($handle);
+}

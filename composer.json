@@ -1,0 +1,20 @@
+{
+    "name": "foxtech/vc",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Mike",
+            "email": "bavdysmyh@ukr.net"
+        }
+    ],
+    "require": {
+        "php" : "^7.1.26",
+        "foxtech6/vc-kernel": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app"
+        }
+    },
+    "minimum-stability" : "dev"
+}
