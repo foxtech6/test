@@ -1,14 +1,16 @@
-<body>
+<body class="main">
 <div class="container">
-    <h1>Demo</h1>
-    <div>
-        <form>
-            <input type="text" class="new-address">
-            <button class="send-button">Add address</button>
-        </form>
+    <div class="content">
+        <h1>Demo</h1>
+        <div class="form">
+            <form>
+                <input type="text" class="new-address">
+                <button class="send-button">Add address</button>
+            </form>
+        </div>
+        <div class="link"><a href="/clear">Delete all markers</a></div>
+        <div class="link"><a href="/addresses">List all addresses</a></div>
     </div>
-    <div><a href="/clear">Delete all markers</a></div>
-    <div><a href="/addresses">List all addresses</a></div>
 </div>
 <?php if (empty($markers)): ?>
 <div><h2>Please add markers to map</h2></div>
@@ -25,7 +27,6 @@
 
         for (var i = 0; i < markers.length; i++) {
             address = markers[i];
-            console.log(parseFloat(address[1]));
             var marker = new google.maps.Marker({
                 position: {lat: parseFloat(address[1]), lng: parseFloat(address[2])},
                 label: address[3].toString(),

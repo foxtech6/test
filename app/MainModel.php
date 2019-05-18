@@ -3,7 +3,6 @@
 namespace App;
 
 use Foxtech\Kernel\AbstractModel;
-use PDOStatement;
 
 /**
  * Class MainModel
@@ -55,11 +54,19 @@ class MainModel extends AbstractModel
 
     /**
      * Delete all points from db
-     *
-     * @return mixed Response from PDO
      */
-    public function deleteMarkers()
+    public function deleteMarkers(): void
     {
         $this->db->query("delete from `markers`");
+    }
+
+    /**
+     * Get lat and lng all markers
+     *
+     * @return array Returnlat and lng
+     */
+    public function getLatLng()
+    {
+        return $this->db->query("select `lat`, `lng` from `markers`")->fetchAll();
     }
 }

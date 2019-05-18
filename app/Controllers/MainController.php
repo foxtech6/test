@@ -6,7 +6,7 @@ use App\MainModel;
 use App\Request\MainRequest;
 use Foxtech\Kernel\AbstractController;
 use Foxtech\Kernel\Exceptions\NotFoundException;
-use GuzzleHttp\Client;
+use Exception;
 
 /**
  * Class MainController
@@ -73,6 +73,8 @@ class MainController extends AbstractController
      * Add marker to db
      *
      * @param MainRequest $request Request for add marker
+     *
+     * @throws Exception
      */
     public function addMarker(MainRequest $request)
     {
@@ -93,5 +95,28 @@ class MainController extends AbstractController
         $mainModel->deleteMarkers();
 
         $this->redirect('/');
+    }
+
+    /**
+     * Generate url for get info about distance
+     */
+    public function generateDistanceUrl()
+    {
+        $this->isAjax();
+
+        $mainModel = new MainModel();
+        foreach ($mainModel->getLatLng() as $markerData) {
+            $result[] = $markerData['lat'] . ',' . $markerData['lng'];
+        }
+
+        $latLng = implode('|', $result);
+
+        echo json_encode([
+            'url' => 'https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins='
+                   . $latLng
+                   . '&destinations='
+                   . $latLng
+                   . '&key=AIzaSyDhIiSGIWDB4C5FhGQ6mI7YW51JvuVTgf4'
+        ]);
     }
 }

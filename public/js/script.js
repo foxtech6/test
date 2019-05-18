@@ -1,4 +1,3 @@
-console.log(123);
 $(document).ready(function(){
     $('.send-button').click(function() {
         event.preventDefault();
@@ -14,8 +13,8 @@ $(document).ready(function(){
                     markerLocation = data.results[0].geometry.location;
 
                     $.post("add", {lan: markerLocation.lat, lng: markerLocation.lng, name: $('.new-address').val()},
-                        function(result) {
-                            status = JSON.parse(result).status;
+                        function(data) {
+                            status = JSON.parse(data).status;
                             if ('true' == status) {
                                 location.href = '/';
                             } else {
@@ -29,4 +28,14 @@ $(document).ready(function(){
             }
         );
     });
+
+
+    //TODO
+    // $.get("distance",  function(data) {
+    //     console.log(data);
+    //     $.get(JSON.parse(data).url, function(data) {
+    //         console.log(data)
+    //     });
+    // })
+
 });
