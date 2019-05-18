@@ -7,7 +7,12 @@
             <button class="send-button">Add address</button>
         </form>
     </div>
+    <div><a href="/clear">Delete all markers</a></div>
+    <div><a href="/addresses">List all addresses</a></div>
 </div>
+<?php if (empty($markers)): ?>
+<div><h2>Please add markers to map</h2></div>
+<?php else: ?>
 <div id="map"></div>
 <script>
     function initMap() {
@@ -33,4 +38,5 @@
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDhIiSGIWDB4C5FhGQ6mI7YW51JvuVTgf4&callback=initMap">
 </script>
+<?php endif; ?>
 </body>

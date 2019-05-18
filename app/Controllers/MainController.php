@@ -55,7 +55,7 @@ class MainController extends AbstractController
      *
      * @throws NotFoundException
      */
-    public function listAddresses()
+    public function listAddresses(): void
     {
         $mainModel = new MainModel();
         $result = [];
@@ -82,5 +82,16 @@ class MainController extends AbstractController
         $status = $mainModel->addMarker($request->name, $request->lan, $request->lng);
 
         echo json_encode(['status' => $status]);
+    }
+
+    /**
+     * Clear all markers
+     */
+    public function clearMarkers(): void
+    {
+        $mainModel = new MainModel();
+        $mainModel->deleteMarkers();
+
+        $this->redirect('/');
     }
 }
