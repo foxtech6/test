@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'host' => '',
-    'db'   => '',
-    'user' => '',
-    'pass' => ''
+    'host' => 'localhost',
+    'db'   => 'riga',
+    'user' => 'root',
+    'pass' => 'root'
 ];

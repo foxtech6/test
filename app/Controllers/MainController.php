@@ -3,8 +3,10 @@
 namespace App\Controllers;
 
 use App\MainModel;
+use App\Request\MainRequest;
 use Foxtech\Kernel\AbstractController;
 use Foxtech\Kernel\Exceptions\NotFoundException;
+use GuzzleHttp\Client;
 
 /**
  * Class MainController
@@ -35,7 +37,7 @@ class MainController extends AbstractController
                 $marker['address'],
                 $marker['lat'],
                 $marker['lng'],
-                $number,
+                $number + 1,
             ];
         }
 
@@ -65,5 +67,20 @@ class MainController extends AbstractController
         $this->render('list', [
             'addresses' => $result
         ]);
+    }
+
+    /**
+     * Add marker to db
+     *
+     * @param MainRequest $request Request for add marker
+     */
+    public function addMarker(MainRequest $request)
+    {
+        $this->isAjax();
+
+        $mainModel = new MainModel();
+        $status = $mainModel->addMarker($request->name, $request->lan, $request->lng);
+
+        echo json_encode(['status' => $status]);
     }
 }

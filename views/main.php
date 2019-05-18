@@ -1,6 +1,12 @@
 <body>
 <div class="container">
     <h1>Demo</h1>
+    <div>
+        <form>
+            <input type="text" class="new-address">
+            <button class="send-button">Add address</button>
+        </form>
+    </div>
 </div>
 <div id="map"></div>
 <script>

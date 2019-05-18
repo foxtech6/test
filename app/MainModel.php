@@ -31,4 +31,24 @@ class MainModel extends AbstractModel
     {
         return $this->db->query("select address from `markers`")->fetchAll();
     }
+
+    /**
+     * Add marker to db
+     *
+     * @param string $name Address marker
+     * @param float  $lat  Lat marker
+     * @param float  $lng  Lng marker
+     *
+     * @return bool True if success and false if fail
+     */
+    public function addMarker(string $name, float $lat, float $lng): bool
+    {
+        $query = $this->db->prepare("insert into `markers` (`address`, `lat`, `lng`) values (?, ?, ?)");
+
+        $query->bindParam(1, $name);
+        $query->bindParam(2, $lat);
+        $query->bindParam(3, $lng);
+
+        return $query->execute();
+    }
 }
